@@ -7,6 +7,7 @@ const sliderContainer = document.getElementById('sliders');
 const searchField = document.getElementById("search");
 const errorMsg = document.getElementById("error-message");
 const noImage = document.getElementById('no-image');
+const timeInput = document.getElementById('duration');
 // selected image 
 let sliders = [];
 
@@ -64,7 +65,6 @@ const selectItem = (event, img) => {
     element.classList.remove('added');
     // removing the double clicked image
     sliders.splice(item, 1); 
-    //console.log(sliders)
     alert('Selected Item Removed!');
   }
 };
@@ -104,7 +104,7 @@ const createSlider = (sliders) => {
 
     //function for Slide show duration.
     const duration = () =>{
-      let showTime =  document.getElementById('duration').value || 1;
+      let showTime = timeInput.value || 1;
       
       //console.log(showTime);
       if(showTime < 0.5){
@@ -115,8 +115,7 @@ const createSlider = (sliders) => {
         return (showTime * 1000);
       }
     }
-    const val = duration();
-    console.log(val);
+
     timer = setInterval(function () {
       slideIndex++;
       changeSlide(slideIndex);
@@ -153,6 +152,7 @@ const changeSlide = (index) => {
 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
+  timeInput.value='';
   clearInterval(timer);
   const search = document.getElementById('search');
   toggleSpinner();
